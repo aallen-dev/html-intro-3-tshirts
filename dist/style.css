@@ -908,3 +908,65 @@ body {
     width: 30%; }
   .grid1 .description, .grid1 .price {
     font-size: 1.2em; } }
+
+.rotateTrigger:checked ~ .product {
+  -webkit-animation: rotate 1s;
+  -webkit-animation-fill-mode: forwards; }
+
+.rotateTrigger:checked ~ .product .front {
+  -webkit-animation: hideFront 1s;
+  -webkit-animation-fill-mode: forwards; }
+
+.rotateTrigger:not(:checked) ~ .product {
+  -webkit-animation: rotate1 1s;
+  -webkit-animation-fill-mode: forwards; }
+
+.rotateTrigger:not(:checked) ~ .product .front {
+  -webkit-animation: showFront 1s;
+  -webkit-animation-fill-mode: forwards; }
+
+@-webkit-keyframes rotate {
+  0% {
+    transform: rotateY(0deg); }
+
+  50% {
+    transform: rotateY(90deg); }
+
+  100% {
+    transform: rotateY(0deg); } }
+
+@-webkit-keyframes rotate1 {
+  0% {
+    transform: rotateY(0deg); }
+
+  50% {
+    transform: rotateY(90deg); }
+
+  100% {
+    transform: rotateY(0deg); } }
+
+@-webkit-keyframes hideFront {
+  0% {
+    visibility: visible; }
+
+  50% {
+    visibility: visible; }
+
+  51% {
+    visibility: hidden; }
+
+  100% {
+    visibility: hidden; } }
+
+@-webkit-keyframes showFront {
+  0% {
+    visibility: hidden; }
+
+  50% {
+    visibility: hidden; }
+
+  51% {
+    visibility: visible; }
+
+  100% {
+    visibility: visible; } }
