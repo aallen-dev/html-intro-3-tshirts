@@ -848,28 +848,22 @@ body {
   font-size: 16px; }
 
 * {
-  border: 1px solid red; }
+  color: #58e;
+  font-family: arial; }
 
 .centerIt {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
 
 .grid1 .grid1Cell {
   max-width: 100%;
-  background-color: white;
-  border: 2px solid green;
+  background-color: #f9fcff;
+  border: 4px solid #58e;
   margin-bottom: 50px;
   position: relative;
   font-size: 16px; }
-.grid1 .grid2 {
-  display: block;
-  position: relative; }
-  .grid1 .grid2 .grid2Cell {
-    max-width: 20%; }
-    .grid1 .grid2 .grid2Cell .icon {
-      max-width: 100%;
-      display: block; }
 .grid1 .product {
   display: inline-block;
   position: relative;
@@ -882,12 +876,54 @@ body {
     background-color: inherit;
     max-width: 100%;
     max-height: 100%; }
+  .grid1 .product .logo {
+    max-width: 20%; }
 .grid1 .rotateTrigger {
-  z-index: 10; }
-.grid1 .rotateTrigger {
+  display: none; }
+.grid1 .rotateContainer {
+  transition: all .2s linear;
+  width: 25px;
+  height: 25px;
+  border-left: 2px solid #58e;
+  border-bottom: 2px solid #58e;
+  z-index: 10;
+  float: right; }
+.grid1 .curvedarrow {
+  z-index: 10;
   display: inline-block;
-  float: right;
-  width: 30px; }
+  width: 50px;
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-right: 9px solid #58e;
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  -o-transform: rotate(10deg); }
+.grid1 .rotateContainer:hover > .curvedarrow {
+  border-right: 9px solid #f9fcff;
+  -webkit-tranform: rotate(90deg); }
+.grid1 .rotateContainer:hover > .curvedarrow:after {
+  border-top: 3px solid #f9fcff; }
+.grid1 .rotateContainer:hover {
+  background-color: #58e; }
+.grid1 .curvedarrow:after {
+  content: "";
+  position: absolute;
+  border: 0 solid transparent;
+  border-top: 3px solid #58e;
+  border-radius: 20px 0 0 0;
+  top: -12px;
+  left: -9px;
+  width: 12px;
+  height: 12px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg); }
 .grid1 .description, .grid1 .price {
   font-size: 1.8em; }
 .grid1 .price {
@@ -898,42 +934,138 @@ body {
 .grid1 .description {
   position: absolute;
   left: 10px; }
+.grid1 .grid2 .grid2Cell {
+  border-top: 4px solid #58e;
+  border-left: 4px solid #58e;
+  max-width: 20%;
+  text-align: center; }
+.grid1 .grid2 .orange {
+  color: orange; }
+.grid1 .grid2 .blue {
+  color: blue; }
+.grid1 .grid2 .red {
+  color: red; }
+.grid1 .grid2 .white {
+  color: yellow; }
+.grid1 .grid2 .colorSelector {
+  padding: 3px; }
+.grid1 .grid2 .colorSelector:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #58e; }
+.grid1 .grid2 .grid2Cell:first-child {
+  border-left: none; }
+.grid1 .grid2 .grid2Cell:hover {
+  transition: all .2s linear;
+  color: #f9fcff;
+  background-color: #58e; }
+.grid1 .grid2 .grid2Cell:not(:hover) {
+  transition: all .2s linear; }
+.grid1 .grid2 i, .grid1 .grid2 b, .grid1 .grid2 label {
+  color: inherit; }
+.grid1 .grid2 .floatIt {
+  visibility: hidden;
+  display: inline; }
+.grid1 .grid2 .floater {
+  position: relative;
+  left: -20px;
+  cursor: pointer;
+  color: #f00;
+  opacity: 0; }
+.grid1 .grid2 .dropIn > div {
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 4px solid #58e;
+  text-transform: uppercase; }
+.grid1 .grid2 .dropIn > div:hover {
+  transition: all .2s linear;
+  color: #f9fcff;
+  background-color: #58e; }
+.grid1 .grid2 .dropIn > div:not(:hover) {
+  transition: all .2s linear; }
 @media (min-width: 765px) {
   .grid1 .grid1Cell {
     width: 45%; }
   .grid1 .description, .grid1 .price {
     font-size: 1.5em; } }
-@media (min-width: 1024px) {
+@media (min-width: 1000px) {
   .grid1 .grid1Cell {
     width: 30%; }
   .grid1 .description, .grid1 .price {
     font-size: 1.2em; } }
 
+.floatIt:checked ~ .floater {
+  -webkit-animation: floatHeart 1s; }
+
+@-webkit-keyframes floatHeart {
+  0% {
+    opacity: 1; }
+
+  100% {
+    transform: scale(2) translate(25px, -25px);
+    opacity: 0; } }
+
+.floatIt:not(:checked) ~ .floater {
+  -webkit-animation: floatHeart1 1s; }
+
+@-webkit-keyframes floatHeart1 {
+  0% {
+    opacity: 1; }
+
+  100% {
+    transform: scale(2) translate(25px, -25px);
+    opacity: 0; } }
+
 .dropIn {
   display: inline-block;
   position: absolute;
-  bottom: 100%;
-  background-color: white;
+  bottom: 220%;
+  background-color: #f9fcff;
   padding: 15px;
-  opacity: 0; }
+  opacity: 0;
+  background: #f9fcff;
+  border: 2px solid #58e;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  transform: translate(-50%, 0); }
 
-.icon:hover ~ .dropIn {
-  -webkit-animation: slideIn 1s;
+.dropIn:before {
+  content: "";
+  position: absolute;
+  right: 35%;
+  top: 100%;
+  border: 8px solid;
+  border-color: #58e transparent transparent #58e; }
+
+.dropIn:after {
+  content: "";
+  position: absolute;
+  right: 38%;
+  top: 100%;
+  border: 6px solid;
+  border-color: #f9fcff transparent transparent #f9fcff; }
+
+.grid2Cell:hover > .dropIn {
+  -webkit-animation: slideIn .3s;
   -webkit-animation-fill-mode: forwards; }
 
-.icon:not(:hover) ~ .dropIn {
-  -webkit-animation: slideOut 1s;
+.grid2Cell:not(:hover) > .dropIn {
+  -webkit-animation: slideOut .3s;
   -webkit-animation-fill-mode: forwards; }
 
 .dropIn:hover {
   -webkit-animation-play-state: paused !important;
-  background: green;
-  opacity: 1;
+  background: #CEF;
+  opacity: 1 !important;
   bottom: 100%; }
+
+.dropIn:hover:after {
+  border-color: #CEF transparent transparent #CEF; }
 
 @-webkit-keyframes slideIn {
   0% {
-    bottom: 140%;
+    bottom: 220%;
     display: none;
     opacity: 0; }
 
@@ -948,10 +1080,12 @@ body {
     bottom: 100%;
     opacity: 1; }
 
+  99% {
+    bottom: 220%;
+    opacity: 0; }
+
   100% {
-    bottom: 140%;
-    opacity: 0;
-    display: none; } }
+    left: -1000%; } }
 
 .rotateTrigger:checked ~ .product {
   -webkit-animation: rotate 1s;
@@ -968,6 +1102,15 @@ body {
 .rotateTrigger:not(:checked) ~ .product .front {
   -webkit-animation: showFront 1s;
   -webkit-animation-fill-mode: forwards; }
+
+.rotateTrigger:checked ~ .rotateContainer > .rotateArrow {
+  transition: all .2s ease-in;
+  -webkit-transform-origin: left;
+  transform: rotate(180deg); }
+
+.rotateTrigger:not(:checked) ~ .rotateContainer > .rotateArrow {
+  transition: all .2s ease-in;
+  transform: rotate(0deg); }
 
 @-webkit-keyframes rotate {
   0% {

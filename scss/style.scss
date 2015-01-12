@@ -60,11 +60,21 @@ body {
     font-size:16px;
 }
 
+$BGcolor : #f9fcff;
+$BGhighlight : #CEF;
+$lineColor : #58e;
+$textHighlight: #555;
+
+
 *{
-    border: 1px solid red;
+    color:$lineColor;
+    font-family: arial;
 }
-$smoothBGColor : white;
+
+
+
 .centerIt{
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -74,26 +84,11 @@ $smoothBGColor : white;
 
     .grid1Cell{
         max-width:100%;
-        background-color:$smoothBGColor;
-        border:2px solid green;
+        background-color:$BGcolor;
+        border:4px solid $lineColor;
         margin-bottom: 50px;
         position:relative;
         font-size:16px;
-    }
-    .grid2{
-        display:block;
-        position:relative;
-
-        .grid2Cell{
-            max-width:20%;
-
-            .icon{
-                 max-width: 100%;
-                 display:block;
-                
-            }
-
-        }
     }
     
     .product{
@@ -110,15 +105,63 @@ $smoothBGColor : white;
             max-width:100%;
             max-height: 100%;
         }
+        .logo{
+            max-width: 20%
+        }
     }
 
     .rotateTrigger{
-        z-index: 10;
+        display: none;
     }
-    .rotateTrigger{
-        display:inline-block;
+    .rotateContainer{
+        transition:all .2s linear;
+        width:25px;
+        height:25px;
+        border-left:2px solid $lineColor;
+        border-bottom:2px solid $lineColor;
+        z-index: 10;
         float:right;
-        width:30px;
+    }
+    .curvedarrow {
+        z-index: 10;
+        display:inline-block;
+        width:50px;
+        position: absolute;
+        right:5px;
+        top:8px;
+        width: 0;
+        height: 0;
+        border-top: 9px solid transparent;
+        border-right: 9px solid $lineColor;
+        -webkit-transform: rotate(10deg);
+        -moz-transform: rotate(10deg);
+        -ms-transform: rotate(10deg);
+        -o-transform: rotate(10deg);
+    }
+    .rotateContainer:hover > .curvedarrow{
+        border-right: 9px solid $BGcolor;
+        -webkit-tranform:rotate(90deg)
+    }
+    .rotateContainer:hover > .curvedarrow:after{
+        border-top: 3px solid $BGcolor;
+    }
+    .rotateContainer:hover{
+        background-color:$lineColor;
+    }
+    .curvedarrow:after {
+        content: "";
+        position: absolute;
+        border: 0 solid transparent;
+        border-top: 3px solid $lineColor;
+        border-radius: 20px 0 0 0;
+        top: -12px;
+        left: -9px;
+        width: 12px;
+        height: 12px;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
     }
     .description , .price{
         font-size: 1.8em;
@@ -134,6 +177,79 @@ $smoothBGColor : white;
         left:10px;
     }
 
+    .grid2{
+
+        .grid2Cell{
+            border-top:4px solid $lineColor;
+            border-left:4px solid $lineColor;
+            max-width:20%;
+            text-align: center;
+
+        }
+
+        .orange{
+            color:orange;
+        }
+        .blue{
+            color:blue;
+        }
+        .red{
+            color:red;
+        }
+        .white{
+            color:yellow;
+        }
+        .colorSelector{
+            padding:3px;
+        }
+        .colorSelector:hover{
+            cursor:pointer;
+            border-radius:5px;
+            border:1px solid $lineColor;
+        }
+
+        .grid2Cell:first-child{
+            border-left:none;
+        }
+        .grid2Cell:hover{
+            transition:all .2s linear;
+
+            color:$BGcolor;
+            background-color:$lineColor;
+        }
+        .grid2Cell:not(:hover){
+            transition:all .2s linear;
+        }
+        i , b , label{
+            color:inherit;
+        }
+        .floatIt{
+            visibility: hidden;
+            display:inline;
+        }
+        .floater{
+            position:relative;
+            left:-20px;
+            cursor:pointer;
+            color:#f00;
+            opacity:0;
+        }
+        .dropIn > div{
+            width:100%;
+            cursor:pointer;
+            border-bottom: 4px solid $lineColor;
+            text-transform: uppercase;
+        }
+        .dropIn > div:hover{
+            transition:all .2s linear;
+            color:$BGcolor;
+            background-color:$lineColor;
+        }
+        .dropIn > div:not(:hover){
+            transition:all .2s linear;
+        }
+    }
+
     @media (min-width: 765px) {
         .grid1Cell {
             width: 45%;
@@ -142,7 +258,7 @@ $smoothBGColor : white;
             font-size: 1.5em;
         }
     }
-    @media (min-width: 1024px) {
+    @media (min-width: 1000px) {
         .grid1Cell{
             width: 30%;
         }
@@ -152,32 +268,89 @@ $smoothBGColor : white;
     }
 }
 
-.dropIn{
-    display:inline-block;
-    position:absolute;
-    bottom:100%;
-    background-color:$smoothBGColor;
-    padding:15px;
-    opacity:0;
+
+.floatIt:checked ~ .floater{
+    -webkit-animation: floatHeart 1s;
+}
+@-webkit-keyframes floatHeart{
+    0%{
+        opacity:1;
+    }
+    100%{
+        transform:scale(2) translate(25px , -25px);
+        opacity:0;
+    }
+}
+.floatIt:not(:checked) ~ .floater{
+    -webkit-animation: floatHeart1 1s;
+}
+@-webkit-keyframes floatHeart1{
+    0%{
+        opacity:1;
+    }
+    100%{
+        transform:scale(2) translate(25px , -25px);
+        opacity:0;
+    }
 }
 
-.icon:hover ~ .dropIn{
-    -webkit-animation: slideIn 1s ; 
+.dropIn {
+    display:inline-block;
+    position:absolute;
+    bottom:220%;
+    background-color:$BGcolor;
+    padding:15px;
+    opacity:0;
+
+    background: $BGcolor;
+    border:2px solid $lineColor;
+    -moz-border-radius:    10px;
+    -webkit-border-radius: 10px;
+    border-radius:         10px;
+
+    transform: translate(-50%, 0);
+}
+
+.dropIn:before  {
+    content:"";
+    position: absolute;
+    right: 35%;
+    top: 100%;
+    border: 8px solid;
+    border-color: $lineColor transparent transparent $lineColor;
+}
+.dropIn:after  {
+    content:"";
+    position: absolute;
+    right: 38%;
+    top: 100%;
+    border: 6px solid;
+    border-color: $BGcolor transparent transparent $BGcolor;
+}
+
+
+.grid2Cell:hover > .dropIn{
+    -webkit-animation: slideIn .3s ; 
     -webkit-animation-fill-mode: forwards;
 }
-.icon:not(:hover) ~ .dropIn{
-    -webkit-animation: slideOut 1s; 
+.grid2Cell:not(:hover) > .dropIn{
+    -webkit-animation: slideOut .3s; 
     -webkit-animation-fill-mode: forwards;
 }
 .dropIn:hover{
     -webkit-animation-play-state: paused !important;
-    background: green;
-    opacity:1;
+    background: $BGhighlight;
+    opacity:1 !important;
     bottom:100%;
 }
+.dropIn:hover:after{
+    border-color: $BGhighlight transparent transparent $BGhighlight;
+}
+
+
 @-webkit-keyframes slideIn{
   0% {
-    bottom: 140%;
+    bottom: 220%;
     display:none;
     opacity:0;
   }
@@ -193,10 +366,12 @@ $smoothBGColor : white;
     bottom: 100%;
     opacity:1;
   }
-  100% {
-    bottom: 140%;
+  99% {
+    bottom: 220%;
     opacity:0;
-    display:none;
+  }
+  100%{
+    left:-1000%;//this hack prevents 2 features from combining to create an unwanted effect.
   }
 }
 
@@ -216,6 +391,15 @@ $smoothBGColor : white;
 .rotateTrigger:not(:checked) ~ .product .front {
     -webkit-animation: showFront 1s; 
     -webkit-animation-fill-mode: forwards;
+}
+.rotateTrigger:checked ~ .rotateContainer > .rotateArrow{
+    transition:all .2s ease-in;
+    -webkit-transform-origin: left;
+    transform:rotate(180deg);
+}
+.rotateTrigger:not(:checked) ~ .rotateContainer > .rotateArrow{
+    transition:all .2s ease-in;
+    transform:rotate(0deg)
 }
 
 // @keyframes rotate 
@@ -270,5 +454,4 @@ $smoothBGColor : white;
     visibility: visible;
   }
 }
-
 
