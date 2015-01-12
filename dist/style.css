@@ -878,6 +878,11 @@ body {
     max-height: 100%; }
   .grid1 .product .logo {
     max-width: 20%; }
+  .grid1 .product .orange {
+    z-index: 99999;
+    color: orange !important; }
+  .grid1 .product .orange:active ~ .notOrange {
+    display: none; }
 .grid1 .rotateTrigger {
   display: none; }
 .grid1 .rotateContainer {

@@ -108,6 +108,13 @@ $textHighlight: #555;
         .logo{
             max-width: 20%
         }
+        .orange{
+            z-index: 99999;
+            color:orange !important;
+        }
+        .orange:active ~ .notOrange{
+            display:none;
+        }
     }
 
     .rotateTrigger{
